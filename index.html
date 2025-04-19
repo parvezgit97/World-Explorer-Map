@@ -200,17 +200,17 @@
                 .then((res) => res.json())
                 .then((data) => {
                     let country = data[0];
-                    document.getElementById("area").textContent = country.area.toLocaleString();
+                    document.getElementById("area      ").textContent = country.area.toLocaleString();
                     document.getElementById("population").textContent = country.population.toLocaleString();
-                    document.getElementById("capital").textContent = country.capital?.[0] || '-';
-                    document.getElementById("currency").textContent = Object.values(country.currencies || {})[0]?.name || '-';
-                    document.getElementById("languages").textContent = Object.values(country.languages || {}).join(', ') || '-';
-                    document.getElementById("timezone").textContent = country.timezones?.[0] || '-';
-                    document.getElementById("flag").innerHTML = `<img src="${country.flags.png}" width="30" alt="flag" />`;
+                    document.getElementById("capital   ").textContent = country.capital?.[0] || '-';
+                    document.getElementById("currency  ").textContent = Object.values(country.currencies || {})[0]?.name || '-';
+                    document.getElementById("languages ").textContent = Object.values(country.languages || {}).join(', ') || '-';
+                    document.getElementById("timezone  ").textContent = country.timezones?.[0] || '-';
+                    document.getElementById("flag      ").innerHTML = `<img src="${country.flags.png}" width="30" alt="flag" />`;
 
                     // Placeholder
-                    document.getElementById("visa").textContent = "Check Embassy Website";
-                    document.getElementById("places").textContent = "E.g., Popular cities and landmarks";
+                    document.getElementById("visa      ").textContent = "Check Embassy Website";
+                    document.getElementById("places    ").textContent = "E.g., Popular cities and landmarks";
 
                     map.setView(country.latlng, 5);
 
