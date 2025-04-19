@@ -91,25 +91,32 @@
             height: 500px;
             border-radius: 12px;
             border: 2px solid var(--secondary-color);
+            transition: filter 0.3s;
+        }
+
+        body.dark-mode #map {
+            filter: invert(90%) hue-rotate(180deg);
         }
 
         #info {
             background-color: var(--secondary-color);
             color: var(--text-color);
-            text-align: center;
             margin-top: 20px;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: all 0.3s ease-in-out;
         }
 
         .highlighted {
             display: inline-block;
             background-color: var(--accent-color);
-            padding: 5px 20px;
+            padding: 5px 10px;
             border-radius: 6px;
             font-weight: bold;
             color: white;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -143,26 +150,32 @@
         <div id="map"></div>
 
         <div id="info">
-            <p><span class="highlighted">Country Area:</span> <span id="area">-</span> km²</p>
-            <p><span class="highlighted">Population:</span> <span id="population">-</span></p>
+            <p><span class="highlighted" id="areaLabel">Area:</span> <span id="area">-</span> km²</p>
+            <p><span class="highlighted" id="populationLabel">Population:</span> <span id="population">-</span></p>
+            <p><span class="highlighted" id="capitalLabel">Capital:</span> <span id="capital">-</span></p>
+            <p><span class="highlighted" id="currencyLabel">Currency:</span> <span id="currency">-</span></p>
+            <p><span class="highlighted" id="languageLabel">Languages:</span> <span id="languages">-</span></p>
+            <p><span class="highlighted" id="timezoneLabel">Timezone:</span> <span id="timezone">-</span></p>
+            <p><span class="highlighted" id="flagLabel">Flag:</span> <span id="flag">-</span></p>
+            <p><span class="highlighted" id="visaLabel">Tourist Visa:</span> <span id="visa">-</span></p>
+            <p><span class="highlighted" id="placesLabel">Most Visited Places:</span> <span id="places">-</span></p>
         </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.geojsoncss/dist/leaflet-geojsoncss.min.js"></script>
     <script>
         let map = L.map("map").setView([20, 0], 2);
         let countryLayer = null;
+        let currentLang = "en";
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
         function updateCountries() {
             let continent = document.getElementById("continentSelect").value;
             let countrySelect = document.getElementById("countrySelect");
-
-            countrySelect.innerHTML = '<option value="">Select Country</option>';
+            countrySelect.innerHTML = '<option value="">' + (currentLang === 'bn' ? 'দেশ বাছাই করুন' : 'Select Country') + '</option>';
 
             if (continent) {
                 fetch(`https://restcountries.com/v3.1/region/${continent}`)
@@ -189,6 +202,16 @@
                     let country = data[0];
                     document.getElementById("area").textContent = country.area.toLocaleString();
                     document.getElementById("population").textContent = country.population.toLocaleString();
+                    document.getElementById("capital").textContent = country.capital?.[0] || '-';
+                    document.getElementById("currency").textContent = Object.values(country.currencies || {})[0]?.name || '-';
+                    document.getElementById("languages").textContent = Object.values(country.languages || {}).join(', ') || '-';
+                    document.getElementById("timezone").textContent = country.timezones?.[0] || '-';
+                    document.getElementById("flag").innerHTML = `<img src="${country.flags.png}" width="30" alt="flag" />`;
+
+                    // Placeholder
+                    document.getElementById("visa").textContent = "Check Embassy Website";
+                    document.getElementById("places").textContent = "E.g., Popular cities and landmarks";
+
                     map.setView(country.latlng, 5);
 
                     fetch(`https://nominatim.openstreetmap.org/search.php?country=${country.name.common}&polygon_geojson=1&format=json`)
@@ -208,20 +231,47 @@
         }
 
         function toggleLanguage() {
-            const currentLang = document.getElementById("siteTitle").textContent;
-            if (currentLang === "World Explorer") {
-                document.getElementById("siteTitle").textContent = "ওয়ার্ল্ড এক্সপ্লোরার";
-                const label = document.querySelector("label[for='continentSelect']");
-                if (label) {
-                    label.textContent = "মহাদেশ বাছাই করুন";
-                }
-            } else {
-                document.getElementById("siteTitle").textContent = "World Explorer";
-                const label = document.querySelector("label[for='continentSelect']");
-                if (label) {
-                    label.textContent = "Select Continent";
-                }
-            }
+            currentLang = currentLang === "en" ? "bn" : "en";
+            const text = currentLang === "bn" ? {
+                title: "ওয়ার্ল্ড এক্সপ্লোরার",
+                continent: "মহাদেশ বাছাই করুন",
+                country: "দেশ বাছাই করুন",
+                area: "আয়তন:",
+                pop: "জনসংখ্যা:",
+                capital: "রাজধানী:",
+                currency: "মুদ্রা:",
+                language: "ভাষা:",
+                timezone: "টাইমজোন:",
+                flag: "পতাকা:",
+                visa: "ভিসা তথ্য:",
+                places: "জনপ্রিয় স্থানসমূহ:"
+            } : {
+                title: "World Explorer",
+                continent: "Select Continent",
+                country: "Select Country",
+                area: "Area:",
+                pop: "Population:",
+                capital: "Capital:",
+                currency: "Currency:",
+                language: "Languages:",
+                timezone: "Timezone:",
+                flag: "Flag:",
+                visa: "Tourist Visa:",
+                places: "Most Visited Places:"
+            };
+
+            document.getElementById("siteTitle").textContent = text.title;
+            document.querySelector("#continentSelect").options[0].text = text.continent;
+            document.querySelector("#countrySelect").options[0].text = text.country;
+            document.getElementById("areaLabel").textContent = text.area;
+            document.getElementById("populationLabel").textContent = text.pop;
+            document.getElementById("capitalLabel").textContent = text.capital;
+            document.getElementById("currencyLabel").textContent = text.currency;
+            document.getElementById("languageLabel").textContent = text.language;
+            document.getElementById("timezoneLabel").textContent = text.timezone;
+            document.getElementById("flagLabel").textContent = text.flag;
+            document.getElementById("visaLabel").textContent = text.visa;
+            document.getElementById("placesLabel").textContent = text.places;
         }
 
         function toggleDarkMode() {
@@ -230,4 +280,3 @@
     </script>
 </body>
 </html>
-
