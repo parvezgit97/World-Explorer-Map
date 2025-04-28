@@ -25,6 +25,7 @@
         .dark .bg-gray-800 { background-color: #1a202c !important; }
         .dark .divide-gray-700 { border-color: #4a5568 !important; }
         [hidden] { display: none !important; }
+        
         /* Bengali font */
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap');
         .bn { font-family: 'Hind Siliguri', sans-serif; }
@@ -46,151 +47,263 @@
             box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.5);
         }
         
-        /* Language selector styling */
-        .language-selector {
-            position: relative;
-            min-width: 150px;
-        }
-        .language-selector select {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            padding: 8px 32px 8px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            background-color: white;
-            color: #374151;
-            font-size: 14px;
-            cursor: pointer;
-            width: 100%;
-        }
-        .dark .language-selector select {
-            background-color: #2d3748;
-            color: #e2e8f0;
-            border-color: #4a5568;
-        }
-        .language-selector::after {
-            content: "▼";
-            position: absolute;
-            top: 50%;
-            right: 12px;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: #6b7280;
-            font-size: 10px;
+        /* 3D Globe Animation */
+        .globe-container {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
         }
         
-        /* Tourist place card */
-        .place-card {
+        .globe {
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/apoorv-pro/3d-globe@main/globe.png');
+            background-size: cover;
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Translator Slider */
+        .translate-container {
+            position: relative;
+            width: 40px;
             transition: all 0.3s ease;
+        }
+        
+        .translate-container.expanded {
+            width: 200px;
+        }
+        
+        .translate-toggle {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .translate-content {
+            position: absolute;
+            right: 40px;
+            top: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        
+        .translate-container.expanded .translate-content {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            background: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode-toggle.dark {
+            background: #4a5568;
+        }
+        
+        .dark-mode-toggle .toggle-slider {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #3b82f6;
+            top: 3px;
+            left: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode-toggle.dark .toggle-slider {
+            left: 33px;
+        }
+        
+        /* AI Button */
+        .ai-button {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.2);
+        }
+        
+        .ai-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.3);
+        }
+        
+        /* Search bar */
+        .search-container {
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
             overflow: hidden;
         }
-        .place-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        .place-image {
-            height: 180px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .place-card:hover .place-image {
-            transform: scale(1.05);
+        
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
         
-        /* AI response styling */
-        .ai-response {
-            line-height: 1.6;
-        }
-        .ai-response p {
-            margin-bottom: 0.75rem;
-        }
-        .ai-response ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-        .ai-response li {
-            margin-bottom: 0.25rem;
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
         }
         
-        /* Loading animation */
-        .typing-dots span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: currentColor;
-            margin: 0 2px;
-            opacity: 0.4;
-            animation: typing-dots 1.4s infinite ease-in-out;
-        }
-        .typing-dots span:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .typing-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        .typing-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        @keyframes typing-dots {
-            0%, 60%, 100% { opacity: 0.4; transform: translateY(0); }
-            30% { opacity: 1; transform: translateY(-3px); }
+        /* Navigation */
+        .nav-item {
+            position: relative;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        /* Hide Google Translate branding */
-        .goog-te-banner-frame {
-            display: none !important;
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: all 0.3s ease;
         }
-        body {
-            top: auto !important;
+        
+        .nav-item:hover::after {
+            width: 100%;
         }
-        .goog-te-gadget {
-            color: transparent !important;
+        
+        /* Weather icons */
+        .weather-icon {
+            font-size: 48px;
+            margin-right: 15px;
+        }
+        
+        /* Comparison table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .dark .comparison-table th, .dark .comparison-table td {
+            border-bottom: 1px solid #4a5568;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .translate-container.expanded {
+                width: 180px;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 dark:bg-gray-900">
     <div class="container mx-auto px-4 py-8">
         <!-- Header with Toggles -->
         <header class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold text-blue-600">World Explorer</h1>
-            <div class="flex space-x-4 items-center">
-                <!-- Custom Language Selector -->
-                <div class="language-selector">
-                    <select id="languageSelect">
-                        <option value="en">English</option>
-                        <option value="bn">বাংলা</option>
-                        <option value="hi">हिन्दी</option>
-                        <option value="es">Español</option>
-                        <option value="fr">Français</option>
-                        <option value="de">Deutsch</option>
-                        <option value="ja">日本語</option>
-                        <option value="ar">العربية</option>
-                    </select>
+            <div class="flex items-center">
+                <div class="globe-container">
+                    <div class="globe"></div>
                 </div>
-                <button id="darkModeToggle" class="px-3 py-1 bg-gray-200 rounded-md flex items-center dark:bg-gray-700 dark:text-white">
-                    <i class="fas fa-moon mr-1"></i>
-                    <span>Dark</span>
-                </button>
-                <button id="aiButton" class="px-3 py-1 bg-blue-100 rounded-md flex items-center dark:bg-gray-700 dark:text-white">
-                    <i class="fas fa-robot mr-1"></i>
-                    <span>AI</span>
+                <h1 class="text-3xl font-bold text-blue-600 dark:text-blue-400">World Explorer</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="translate-container" id="translateContainer">
+                    <div class="translate-toggle" id="translateToggle">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="translate-content" id="google_translate_element"></div>
+                </div>
+                
+                <div class="dark-mode-toggle" id="darkModeToggle">
+                    <div class="toggle-slider flex items-center justify-center">
+                        <i class="fas fa-moon text-white text-xs"></i>
+                    </div>
+                </div>
+                
+                <button id="aiButton" class="ai-button">
+                    <i class="fas fa-robot mr-2"></i>
+                    <span>AI Assistant</span>
                 </button>
             </div>
         </header>
 
+        <!-- Navigation -->
+        <nav class="flex border-b border-gray-200 dark:border-gray-700 mb-8">
+            <div class="nav-item text-blue-600 dark:text-blue-400 font-medium border-b-2 border-blue-600 dark:border-blue-400">
+                <i class="fas fa-home mr-2"></i>
+                Home
+            </div>
+            <div class="nav-item text-gray-600 dark:text-gray-300" id="savedCountriesNav">
+                <i class="fas fa-bookmark mr-2"></i>
+                Saved Countries
+            </div>
+            <div class="nav-item text-gray-600 dark:text-gray-300" id="countryDetailsNav">
+                <i class="fas fa-file-pdf mr-2"></i>
+                Country Details
+            </div>
+        </nav>
+
         <!-- Search Bar with Autocomplete -->
         <div class="relative mb-8">
-            <div class="relative">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
                 <input id="searchInput" type="text" placeholder="Search for a country..." 
-                       class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <div class="absolute right-3 top-3 text-gray-400">
-                    <i class="fas fa-search"></i>
-                </div>
+                       class="search-input dark:bg-gray-800 dark:text-white">
             </div>
-            <div id="autocompleteResults" class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg hidden dark:bg-gray-800 dark:border-gray-600"></div>
+            <div id="autocompleteResults" class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg hidden dark:bg-gray-800 dark:border-gray-600">
+                <!-- Results will be populated here -->
+            </div>
         </div>
 
         <!-- Main Content -->
@@ -198,14 +311,20 @@
             <!-- Left Sidebar - Continent/Country Selection -->
             <div class="lg:w-1/4">
                 <div class="bg-white p-6 rounded-lg shadow-md mb-6 dark:bg-gray-800">
-                    <h2 class="text-xl font-bold mb-4 dark:text-white" data-i18n="selectContinent">Select Continent</h2>
+                    <h2 class="text-xl font-bold mb-4 dark:text-white flex items-center">
+                        <i class="fas fa-globe-americas mr-2"></i>
+                        <span data-i18n="selectContinent">Select Continent</span>
+                    </h2>
                     <div id="continentButtons" class="grid grid-cols-2 gap-2">
                         <!-- Continents will be added here by JavaScript -->
                     </div>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-                    <h2 class="text-xl font-bold mb-4 dark:text-white" data-i18n="countries">Countries</h2>
+                    <h2 class="text-xl font-bold mb-4 dark:text-white flex items-center">
+                        <i class="fas fa-flag mr-2"></i>
+                        <span data-i18n="countries">Countries</span>
+                    </h2>
                     <div id="countryList" class="space-y-2 max-h-96 overflow-y-auto">
                         <!-- Countries will be added here by JavaScript -->
                     </div>
@@ -216,7 +335,10 @@
             <div class="lg:w-3/4">
                 <!-- Map Container -->
                 <div class="bg-white p-6 rounded-lg shadow-md mb-6 dark:bg-gray-800">
-                    <h2 class="text-xl font-bold mb-4 dark:text-white" data-i18n="worldMap">World Map</h2>
+                    <h2 class="text-xl font-bold mb-4 dark:text-white flex items-center">
+                        <i class="fas fa-map-marked-alt mr-2"></i>
+                        <span data-i18n="worldMap">World Map</span>
+                    </h2>
                     <div id="map" class="rounded-lg"></div>
                 </div>
 
@@ -225,11 +347,11 @@
                     <div class="flex justify-between items-center mb-4">
                         <h2 id="countryName" class="text-2xl font-bold dark:text-white"></h2>
                         <div class="flex space-x-2">
-                            <button id="saveCountry" class="p-2 bg-blue-100 rounded-full dark:bg-gray-700" title="Save for later">
-                                <i class="fas fa-bookmark text-blue-600 dark:text-blue-400"></i>
+                            <button id="saveCountryButton" class="p-2 bg-blue-100 rounded-full dark:bg-gray-700 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-gray-600 transition">
+                                <i class="fas fa-bookmark"></i>
                             </button>
-                            <button id="speakButton" class="p-2 bg-blue-100 rounded-full dark:bg-gray-700" title="Read information">
-                                <i id="speakIcon" class="fas fa-volume-up text-blue-600 dark:text-blue-400"></i>
+                            <button id="speakButton" class="p-2 bg-blue-100 rounded-full dark:bg-gray-700 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-gray-600 transition">
+                                <i id="speakIcon" class="fas fa-volume-up"></i>
                             </button>
                         </div>
                     </div>
@@ -237,30 +359,39 @@
                     <div class="info-grid gap-6 mb-6">
                         <!-- Basic Info -->
                         <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
-                            <h3 class="text-lg font-semibold mb-2 dark:text-white" data-i18n="basicInfo">Basic Information</h3>
+                            <h3 class="text-lg font-semibold mb-2 dark:text-white flex items-center">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                <span data-i18n="basicInfo">Basic Information</span>
+                            </h3>
                             <div class="space-y-2 dark:text-gray-300">
-                                <p><span class="font-semibold" data-i18n="area">Area:</span> <span id="countryArea">-</span> km²</p>
-                                <p><span class="font-semibold" data-i18n="population">Population:</span> <span id="countryPopulation">-</span></p>
-                                <p><span class="font-semibold" data-i18n="capital">Capital:</span> <span id="countryCapital">-</span></p>
-                                <p><span class="font-semibold" data-i18n="currency">Currency:</span> <span id="countryCurrency">-</span></p>
-                                <p><span class="font-semibold" data-i18n="languages">Languages:</span> <span id="countryLanguages">-</span></p>
-                                <p><span class="font-semibold" data-i18n="timezone">Timezone:</span> <span id="countryTimezone">-</span></p>
-                                <p><span class="font-semibold" data-i18n="touristVisa">Tourist Visa:</span> <span id="countryVisa">-</span></p>
-                                <p><span class="font-semibold" data-i18n="gdp">GDP (nominal):</span> <span id="countryGDP">-</span></p>
-                                <p><span class="font-semibold" data-i18n="armyRank">Military Strength Rank:</span> <span id="countryArmyRank">-</span></p>
+                                <p><span class="font-semibold" data-i18n="area"><i class="fas fa-ruler-combined mr-2"></i>Area:</span> <span id="countryArea">-</span> km²</p>
+                                <p><span class="font-semibold" data-i18n="population"><i class="fas fa-users mr-2"></i>Population:</span> <span id="countryPopulation">-</span></p>
+                                <p><span class="font-semibold" data-i18n="capital"><i class="fas fa-city mr-2"></i>Capital:</span> <span id="countryCapital">-</span></p>
+                                <p><span class="font-semibold" data-i18n="currency"><i class="fas fa-money-bill-wave mr-2"></i>Currency:</span> <span id="countryCurrency">-</span></p>
+                                <p><span class="font-semibold" data-i18n="languages"><i class="fas fa-language mr-2"></i>Languages:</span> <span id="countryLanguages">-</span></p>
+                                <p><span class="font-semibold" data-i18n="timezone"><i class="fas fa-clock mr-2"></i>Timezone:</span> <span id="countryTimezone">-</span></p>
+                                <p><span class="font-semibold" data-i18n="touristVisa"><i class="fas fa-passport mr-2"></i>Tourist Visa:</span> <span id="countryVisa">-</span></p>
+                                <p><span class="font-semibold" data-i18n="gdp"><i class="fas fa-chart-line mr-2"></i>GDP (nominal):</span> <span id="countryGDP">-</span></p>
+                                <p><span class="font-semibold" data-i18n="armyRank"><i class="fas fa-shield-alt mr-2"></i>Military Strength Rank:</span> <span id="countryArmyRank">-</span></p>
                             </div>
                         </div>
 
                         <!-- Flag and Weather -->
                         <div class="space-y-4">
                             <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
-                                <h3 class="text-lg font-semibold mb-2 dark:text-white" data-i18n="flag">Flag</h3>
-                                <img id="countryFlag" src="" alt="Country Flag" class="h-24 border dark:border-gray-600 mx-auto">
+                                <h3 class="text-lg font-semibold mb-2 dark:text-white flex items-center">
+                                    <i class="fas fa-flag mr-2"></i>
+                                    <span data-i18n="flag">Flag</span>
+                                </h3>
+                                <img id="countryFlag" src="" alt="Country Flag" class="h-32 border dark:border-gray-600 mx-auto">
                             </div>
                             <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
-                                <h3 class="text-lg font-semibold mb-2 dark:text-white" data-i18n="weather">Weather</h3>
+                                <h3 class="text-lg font-semibold mb-2 dark:text-white flex items-center">
+                                    <i class="fas fa-cloud-sun mr-2"></i>
+                                    <span data-i18n="weather">Weather</span>
+                                </h3>
                                 <div id="countryWeather" class="flex items-center space-x-4 dark:text-gray-300">
-                                    <div id="weatherIcon" class="text-4xl">☀️</div>
+                                    <div id="weatherIcon" class="weather-icon">☀️</div>
                                     <div>
                                         <p><span class="font-semibold" data-i18n="condition">Condition:</span> <span id="weatherCondition">-</span></p>
                                         <p><span class="font-semibold" data-i18n="temperature">Temperature:</span> <span id="weatherTemp">-</span>°C</p>
@@ -282,51 +413,71 @@
 
                     <!-- More Information Content (hidden by default) -->
                     <div id="moreInfoContent" class="hidden bg-blue-50 p-6 rounded-lg dark:bg-gray-700">
-                        <h3 class="text-lg font-semibold mb-4 dark:text-white" data-i18n="additionalInfo">Additional Information</h3>
+                        <h3 class="text-lg font-semibold mb-4 dark:text-white flex items-center">
+                            <i class="fas fa-book-open mr-2"></i>
+                            <span data-i18n="additionalInfo">Additional Information</span>
+                        </h3>
                         <div id="wikipediaContent" class="dark:text-gray-300">
                             <p>Loading information from Wikipedia...</p>
-                        </div>
-                    </div>
-
-                    <!-- Tourist Attractions -->
-                    <div class="mt-6">
-                        <h3 class="text-lg font-semibold mb-2 dark:text-white" data-i18n="mostVisited">Most Visited Places</h3>
-                        <div id="touristPlaces" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                            <!-- Will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
 
                 <!-- Comparison Tool -->
                 <div id="comparisonTool" class="bg-white p-6 rounded-lg shadow-md mb-6 hidden dark:bg-gray-800">
-                    <h2 class="text-xl font-bold mb-4 dark:text-white" data-i18n="countryComparison">Country Comparison</h2>
-                    <div class="flex flex-wrap gap-4 mb-4">
-                        <select id="compareCountry1" class="p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"></select>
-                        <select id="compareCountry2" class="p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"></select>
+                    <h2 class="text-xl font-bold mb-4 dark:text-white flex items-center">
+                        <i class="fas fa-balance-scale mr-2"></i>
+                        <span data-i18n="countryComparison">Country Comparison</span>
+                    </h2>
+                    <div class="flex flex-wrap items-center gap-4 mb-4">
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="compareWith">Compare with:</label>
+                            <select id="compareCountry" class="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"></select>
+                        </div>
                         <button id="compareButton" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition flex items-center" data-i18n="compare">
-                            <i class="fas fa-balance-scale mr-2"></i>
+                            <i class="fas fa-exchange-alt mr-2"></i>
                             <span>Compare</span>
                         </button>
                     </div>
-                    <div id="comparisonResults" class="hidden">
-                        <!-- Comparison results will be shown here -->
+                    <div id="comparisonResults" class="hidden overflow-x-auto">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr class="bg-gray-100 dark:bg-gray-700">
+                                    <th class="font-medium text-gray-700 dark:text-gray-300" data-i18n="metric">Metric</th>
+                                    <th id="currentCountryHeader" class="font-medium text-gray-700 dark:text-gray-300"></th>
+                                    <th id="comparedCountryHeader" class="font-medium text-gray-700 dark:text-gray-300"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparisonTableBody">
+                                <!-- Comparison rows will be added here -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <!-- Currency Converter -->
                 <div id="currencyConverter" class="bg-white p-6 rounded-lg shadow-md mb-6 hidden dark:bg-gray-800">
-                    <h2 class="text-xl font-bold mb-4 dark:text-white" data-i18n="currencyConverter">Currency Converter</h2>
-                    <div class="flex flex-wrap items-center gap-4">
-                        <input type="number" id="convertAmount" class="p-2 border rounded-md w-24 dark:bg-gray-700 dark:border-gray-600 dark:text-white" value="1">
-                        <select id="convertFrom" class="p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"></select>
-                        <span data-i18n="to" class="dark:text-white">to</span>
-                        <select id="convertTo" class="p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"></select>
+                    <h2 class="text-xl font-bold mb-4 dark:text-white flex items-center">
+                        <i class="fas fa-money-bill-wave mr-2"></i>
+                        <span data-i18n="currencyConverter">Currency Converter</span>
+                    </h2>
+                    <div class="flex flex-wrap items-center gap-4 mb-4">
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="convertWith">Convert with:</label>
+                            <select id="convertCountry" class="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"></select>
+                        </div>
                         <button id="convertButton" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition flex items-center" data-i18n="convert">
-                            <i class="fas fa-exchange-alt mr-2"></i>
+                            <i class="fas fa-calculator mr-2"></i>
                             <span>Convert</span>
                         </button>
                     </div>
-                    <div id="conversionResult" class="mt-4 text-xl font-semibold hidden dark:text-white"></div>
+                    <div id="conversionResult" class="mt-4 p-4 bg-blue-50 rounded-lg dark:bg-gray-700 hidden">
+                        <div class="flex justify-between items-center">
+                            <div class="text-lg font-semibold dark:text-white" id="conversionFrom"></div>
+                            <div class="text-2xl font-bold text-blue-600 dark:text-blue-400" id="conversionTo"></div>
+                        </div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mt-2" id="conversionRate"></div>
+                    </div>
                 </div>
 
                 <!-- Save/Export Button -->
@@ -336,6 +487,48 @@
                         <span data-i18n="exportPDF">Export as PDF</span>
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saved Countries Modal -->
+    <div id="savedCountriesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto dark:bg-gray-800">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold dark:text-white flex items-center">
+                    <i class="fas fa-bookmark mr-2"></i>
+                    <span>Saved Countries</span>
+                </h3>
+                <button id="closeSavedModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="savedCountriesList" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Saved countries will be added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Country Details Modal -->
+    <div id="countryDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[80vh] overflow-y-auto dark:bg-gray-800">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold dark:text-white flex items-center">
+                    <i class="fas fa-file-alt mr-2"></i>
+                    <span id="detailsModalTitle">Country Details</span>
+                </h3>
+                <button id="closeDetailsModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="countryDetailsContent">
+                <!-- Country details will be added here -->
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button id="downloadDetailsButton" class="px-4 py-2 bg-green-600 text-white rounded-md flex items-center hover:bg-green-700 transition">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span>Download as PDF</span>
+                </button>
             </div>
         </div>
     </div>
@@ -352,22 +545,44 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div id="aiResponse" class="mb-4 max-h-64 overflow-y-auto dark:text-gray-300 ai-response">
-                <p data-i18n="aiWelcome">How can I help you with information about countries?</p>
+            <div id="aiResponse" class="mb-4 max-h-64 overflow-y-auto dark:text-gray-300">
+                <div class="mb-2 text-left">
+                    <span class="inline-block bg-gray-100 text-gray-800 px-3 py-1 rounded-lg dark:bg-gray-700 dark:text-gray-300">
+                        <span data-i18n="aiWelcome">How can I help you with information about countries?</span>
+                    </span>
+                </div>
             </div>
             <div class="flex">
                 <input id="aiQuery" type="text" class="flex-grow p-2 border rounded-l-md dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Ask about any country...">
-                <button id="aiSubmit" class="px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700 transition flex items-center" data-i18n="ask">
-                    <i class="fas fa-paper-plane mr-2"></i>
-                    <span>Ask</span>
+                <button id="aiSubmit" class="px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700 transition" data-i18n="ask">
+                    <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
         </div>
     </div>
 
     <script>
+        // Google Translate API
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,bn,hi,fr,es,de,it,pt,ru,zh-CN,ja,ar',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+
+        // Load Google Translate script
+        function loadGoogleTranslate() {
+            var script = document.createElement('script');
+            script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            document.body.appendChild(script);
+        }
+
         // Main Application
         document.addEventListener('DOMContentLoaded', function() {
+            // Load Google Translate
+            loadGoogleTranslate();
+            
             // State management
             const state = {
                 currentCountry: null,
@@ -375,7 +590,7 @@
                 continents: {},
                 darkMode: false,
                 language: 'en',
-                savedCountries: JSON.parse(localStorage.getItem('savedCountries')) || [],
+                savedCountries: JSON.parse(localStorage.getItem('savedCountries') || '[]'),
                 isSpeaking: false,
                 exchangeRates: {},
                 weatherIcons: {
@@ -413,11 +628,11 @@
                     'temperature': 'Temperature',
                     'humidity': 'Humidity',
                     'wind': 'Wind',
-                    'mostVisited': 'Most Visited Places',
                     'countryComparison': 'Country Comparison',
                     'compare': 'Compare',
+                    'compareWith': 'Compare with',
                     'currencyConverter': 'Currency Converter',
-                    'to': 'to',
+                    'convertWith': 'Convert with',
                     'convert': 'Convert',
                     'exportPDF': 'Export as PDF',
                     'aiAssistant': 'AI Assistant',
@@ -425,11 +640,7 @@
                     'ask': 'Ask',
                     'moreInfo': 'More Information',
                     'additionalInfo': 'Additional Information',
-                    'lessInfo': 'Less Information',
-                    'saved': 'Saved',
-                    'save': 'Save',
-                    'light': 'Light',
-                    'dark': 'Dark'
+                    'metric': 'Metric'
                 },
                 'bn': {
                     'selectContinent': 'মহাদেশ নির্বাচন করুন',
@@ -451,11 +662,11 @@
                     'temperature': 'তাপমাত্রা',
                     'humidity': 'আর্দ্রতা',
                     'wind': 'বাতাস',
-                    'mostVisited': 'সবচেয়ে জনপ্রিয় স্থান',
                     'countryComparison': 'দেশের তুলনা',
                     'compare': 'তুলনা করুন',
+                    'compareWith': 'সঙ্গে তুলনা করুন',
                     'currencyConverter': 'মুদ্রা পরিবর্তক',
-                    'to': 'থেকে',
+                    'convertWith': 'সঙ্গে পরিবর্তন করুন',
                     'convert': 'পরিবর্তন করুন',
                     'exportPDF': 'PDF হিসেবে ডাউনলোড করুন',
                     'aiAssistant': 'এআই সহকারী',
@@ -463,11 +674,7 @@
                     'ask': 'জিজ্ঞাসা করুন',
                     'moreInfo': 'আরও তথ্য',
                     'additionalInfo': 'অতিরিক্ত তথ্য',
-                    'lessInfo': 'কম তথ্য',
-                    'saved': 'সংরক্ষিত',
-                    'save': 'সংরক্ষণ করুন',
-                    'light': 'আলো',
-                    'dark': 'অন্ধকার'
+                    'metric': 'মেট্রিক'
                 }
             };
 
@@ -482,7 +689,6 @@
                 darkModeToggle: document.getElementById('darkModeToggle'),
                 speakButton: document.getElementById('speakButton'),
                 speakIcon: document.getElementById('speakIcon'),
-                saveCountry: document.getElementById('saveCountry'),
                 exportButton: document.getElementById('exportButton'),
                 aiButton: document.getElementById('aiButton'),
                 comparisonTool: document.getElementById('comparisonTool'),
@@ -495,7 +701,20 @@
                 moreInfoButton: document.getElementById('moreInfoButton'),
                 moreInfoContent: document.getElementById('moreInfoContent'),
                 wikipediaContent: document.getElementById('wikipediaContent'),
-                languageSelect: document.getElementById('languageSelect')
+                savedCountriesNav: document.getElementById('savedCountriesNav'),
+                savedCountriesModal: document.getElementById('savedCountriesModal'),
+                closeSavedModal: document.getElementById('closeSavedModal'),
+                savedCountriesList: document.getElementById('savedCountriesList'),
+                countryDetailsNav: document.getElementById('countryDetailsNav'),
+                countryDetailsModal: document.getElementById('countryDetailsModal'),
+                closeDetailsModal: document.getElementById('closeDetailsModal'),
+                countryDetailsContent: document.getElementById('countryDetailsContent'),
+                downloadDetailsButton: document.getElementById('downloadDetailsButton'),
+                saveCountryButton: document.getElementById('saveCountryButton'),
+                translateContainer: document.getElementById('translateContainer'),
+                translateToggle: document.getElementById('translateToggle'),
+                compareCountry: document.getElementById('compareCountry'),
+                convertCountry: document.getElementById('convertCountry')
             };
 
             // Initialize the map
@@ -506,7 +725,6 @@
 
             // Apply translations
             function applyTranslations(lang) {
-                state.language = lang;
                 document.querySelectorAll('[data-i18n]').forEach(el => {
                     const key = el.getAttribute('data-i18n');
                     if (translations[lang] && translations[lang][key]) {
@@ -522,17 +740,7 @@
                     document.getElementById('searchInput').placeholder = 'Search for a country...';
                     document.getElementById('aiQuery').placeholder = 'Ask about any country...';
                 }
-                
-                // Update save button text if country is selected
-                if (state.currentCountry) {
-                    updateSaveButton();
-                }
             }
-
-            // Language selector change handler
-            elements.languageSelect.addEventListener('change', function() {
-                applyTranslations(this.value);
-            });
 
             // Fetch all countries data
             fetch('https://restcountries.com/v3.1/all')
@@ -542,15 +750,17 @@
                     organizeByContinent();
                     renderContinents();
                     populateSearchAutocomplete();
-                    populateComparisonSelects();
-                    populateCurrencySelects();
+                    populateComparisonSelect();
+                    populateCurrencySelect();
                     fetchExchangeRates();
                     
                     // Enhance country data with GDP and military rank (mock data)
                     enhanceCountryData();
                     
-                    // Load saved countries
-                    updateSavedCountriesUI();
+                    // Render saved countries if any
+                    if (state.savedCountries.length > 0) {
+                        renderSavedCountries();
+                    }
                 });
 
             // Enhance country data with GDP and military rank (mock data)
@@ -603,27 +813,6 @@
                     'Israel': 20
                 };
 
-                // Mock visa requirements (simplified)
-                const visaRequirements = {
-                    'USA': 'Visa required for most countries',
-                    'Canada': 'Visa required for most countries',
-                    'UK': 'Visa required for most countries',
-                    'Germany': 'Visa-free for Schengen countries',
-                    'France': 'Visa-free for Schengen countries',
-                    'Italy': 'Visa-free for Schengen countries',
-                    'Japan': 'Visa-free for many countries',
-                    'South Korea': 'Visa-free for many countries',
-                    'Australia': 'Visa required for most countries',
-                    'New Zealand': 'Visa required for most countries',
-                    'Singapore': 'Visa-free for many countries',
-                    'Malaysia': 'Visa-free for many countries',
-                    'Thailand': 'Visa-free for many countries',
-                    'India': 'eVisa available for many countries',
-                    'Brazil': 'Visa-free for many countries',
-                    'Argentina': 'Visa-free for many countries',
-                    'South Africa': 'Visa required for most countries'
-                };
-
                 state.countries.forEach(country => {
                     // Add GDP data
                     const gdp = gdpData[country.name.common] || Math.round(Math.random() * 500 + 10);
@@ -632,28 +821,33 @@
                     // Add military rank
                     const rank = militaryRank[country.name.common] || Math.round(Math.random() * 100 + 20);
                     country.militaryRank = rank;
-                    
-                    // Add visa info
-                    country.visa = visaRequirements[country.name.common] || 'Check with local embassy';
                 });
             }
 
-            // Fetch exchange rates (mock data for demo)
+            // Fetch real exchange rates
             async function fetchExchangeRates() {
-                // Mock exchange rates
-                state.exchangeRates = {
-                    'USD': 1,
-                    'EUR': 0.85,
-                    'GBP': 0.73,
-                    'JPY': 110,
-                    'AUD': 1.35,
-                    'CAD': 1.26,
-                    'CHF': 0.92,
-                    'CNY': 6.45,
-                    'SEK': 8.56,
-                    'NZD': 1.42,
-                    'BDT': 110
-                };
+                try {
+                    // Using a free API with fallback
+                    const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                    const data = await response.json();
+                    state.exchangeRates = data.rates;
+                } catch (error) {
+                    console.error('Failed to fetch exchange rates:', error);
+                    // Fallback to some mock rates if API fails
+                    state.exchangeRates = {
+                        'USD': 1,
+                        'EUR': 0.85,
+                        'GBP': 0.73,
+                        'JPY': 110,
+                        'AUD': 1.35,
+                        'CAD': 1.26,
+                        'CHF': 0.92,
+                        'CNY': 6.45,
+                        'SEK': 8.56,
+                        'NZD': 1.42,
+                        'BDT': 110
+                    };
+                }
             }
 
             // Organize countries by continent
@@ -691,11 +885,8 @@
                 elements.continentButtons.innerHTML = '';
                 for (const continent in state.continents) {
                     const button = document.createElement('button');
-                    button.className = 'p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition flex items-center justify-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white';
-                    button.innerHTML = `
-                        <i class="fas fa-globe-americas mr-2"></i>
-                        <span>${continent}</span>
-                    `;
+                    button.className = 'p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white flex items-center justify-center';
+                    button.innerHTML = `<i class="fas fa-globe mr-2"></i>${continent}`;
                     button.addEventListener('click', () => showCountriesByContinent(continent));
                     elements.continentButtons.appendChild(button);
                 }
@@ -756,46 +947,186 @@
                 document.getElementById('countryFlag').src = country.flags.png;
                 document.getElementById('countryFlag').alt = `Flag of ${country.name.common}`;
                 
-                // Visa info
-                document.getElementById('countryVisa').textContent = country.visa;
+                // Visa info (simplified)
+                document.getElementById('countryVisa').textContent = 'Check with local embassy'; // In real app, you'd have a database
                 
                 // Update map to highlight selected country
                 updateMapForCountry(country);
                 
-                // Load tourist places (mock data)
-                loadTouristPlaces(country);
-                
                 // Load weather data
                 if (country.capital && country.capital.length > 0) {
-                    fetchWeatherData(country.capital[0], country.cca2.toLowerCase());
+                    fetchWeatherData(country.capital[0], country.cca2);
                 }
                 
                 // Show comparison and currency tools
                 elements.comparisonTool.classList.remove('hidden');
                 elements.currencyConverter.classList.remove('hidden');
                 
-                // Update save button
+                // Update save button state
                 updateSaveButton();
             }
 
-            // Update save button based on whether country is saved
+            // Update save button state
             function updateSaveButton() {
                 if (!state.currentCountry) return;
                 
                 const isSaved = state.savedCountries.some(c => c.cca3 === state.currentCountry.cca3);
+                const saveButton = elements.saveCountryButton;
+                
                 if (isSaved) {
-                    elements.saveCountry.innerHTML = '<i class="fas fa-bookmark text-yellow-500 dark:text-yellow-400"></i>';
-                    elements.saveCountry.title = translations[state.language]?.saved || 'Saved';
+                    saveButton.innerHTML = '<i class="fas fa-bookmark"></i>';
+                    saveButton.classList.add('text-yellow-500');
+                    saveButton.title = 'Remove from saved';
                 } else {
-                    elements.saveCountry.innerHTML = '<i class="fas fa-bookmark text-blue-600 dark:text-blue-400"></i>';
-                    elements.saveCountry.title = translations[state.language]?.save || 'Save';
+                    saveButton.innerHTML = '<i class="far fa-bookmark"></i>';
+                    saveButton.classList.remove('text-yellow-500');
+                    saveButton.title = 'Save country';
                 }
             }
 
-            // Update saved countries UI
-            function updateSavedCountriesUI() {
-                // In a real app, you might show saved countries in a sidebar
-                console.log('Saved countries:', state.savedCountries);
+            // Save/unsave country
+            function toggleSaveCountry() {
+                if (!state.currentCountry) return;
+                
+                const index = state.savedCountries.findIndex(c => c.cca3 === state.currentCountry.cca3);
+                
+                if (index === -1) {
+                    // Save country
+                    state.savedCountries.push(state.currentCountry);
+                } else {
+                    // Unsave country
+                    state.savedCountries.splice(index, 1);
+                }
+                
+                // Update localStorage
+                localStorage.setItem('savedCountries', JSON.stringify(state.savedCountries));
+                
+                // Update button
+                updateSaveButton();
+                
+                // Update saved countries list if modal is open
+                if (!elements.savedCountriesModal.classList.contains('hidden')) {
+                    renderSavedCountries();
+                }
+            }
+
+            // Render saved countries
+            function renderSavedCountries() {
+                elements.savedCountriesList.innerHTML = '';
+                
+                if (state.savedCountries.length === 0) {
+                    elements.savedCountriesList.innerHTML = '<p class="text-gray-500 dark:text-gray-400 col-span-2 text-center">No saved countries yet.</p>';
+                    return;
+                }
+                
+                state.savedCountries.forEach(country => {
+                    const countryElement = document.createElement('div');
+                    countryElement.className = 'bg-white p-4 rounded-lg shadow-sm border border-gray-200 dark:bg-gray-700 dark:border-gray-600 flex items-center justify-between';
+                    countryElement.innerHTML = `
+                        <div class="flex items-center">
+                            <span class="mr-3">${country.flag}</span>
+                            <span class="font-medium dark:text-white">${country.name.common}</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 view-details" data-cca3="${country.cca3}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="p-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 remove-saved" data-cca3="${country.cca3}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    elements.savedCountriesList.appendChild(countryElement);
+                });
+                
+                // Add event listeners
+                document.querySelectorAll('.view-details').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const cca3 = this.getAttribute('data-cca3');
+                        const country = state.savedCountries.find(c => c.cca3 === cca3);
+                        if (country) {
+                            showCountryDetailsModal(country);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.remove-saved').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const cca3 = this.getAttribute('data-cca3');
+                        const index = state.savedCountries.findIndex(c => c.cca3 === cca3);
+                        
+                        if (index !== -1) {
+                            state.savedCountries.splice(index, 1);
+                            localStorage.setItem('savedCountries', JSON.stringify(state.savedCountries));
+                            renderSavedCountries();
+                            
+                            // If the removed country is the current one, update save button
+                            if (state.currentCountry && state.currentCountry.cca3 === cca3) {
+                                updateSaveButton();
+                            }
+                        }
+                    });
+                });
+            }
+
+            // Show country details in modal
+            function showCountryDetailsModal(country) {
+                elements.countryDetailsContent.innerHTML = `
+                    <div class="flex flex-col md:flex-row gap-6 mb-6">
+                        <div class="md:w-1/3">
+                            <img src="${country.flags.png}" alt="Flag of ${country.name.common}" class="w-full border dark:border-gray-600 rounded-lg">
+                        </div>
+                        <div class="md:w-2/3">
+                            <h2 class="text-2xl font-bold dark:text-white mb-4">${country.name.common}</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
+                                    <p class="font-semibold dark:text-white"><i class="fas fa-city mr-2"></i>Capital:</p>
+                                    <p class="dark:text-gray-300">${country.capital ? country.capital[0] : 'N/A'}</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
+                                    <p class="font-semibold dark:text-white"><i class="fas fa-users mr-2"></i>Population:</p>
+                                    <p class="dark:text-gray-300">${country.population.toLocaleString()}</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
+                                    <p class="font-semibold dark:text-white"><i class="fas fa-ruler-combined mr-2"></i>Area:</p>
+                                    <p class="dark:text-gray-300">${country.area ? country.area.toLocaleString() + ' km²' : 'N/A'}</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
+                                    <p class="font-semibold dark:text-white"><i class="fas fa-language mr-2"></i>Languages:</p>
+                                    <p class="dark:text-gray-300">${country.languages ? Object.values(country.languages).join(', ') : 'N/A'}</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
+                                    <p class="font-semibold dark:text-white"><i class="fas fa-money-bill-wave mr-2"></i>Currency:</p>
+                                    <p class="dark:text-gray-300">${country.currencies ? Object.values(country.currencies).map(c => `${c.name} (${c.symbol || ''})`).join(', ') : 'N/A'}</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
+                                    <p class="font-semibold dark:text-white"><i class="fas fa-chart-line mr-2"></i>GDP:</p>
+                                    <p class="dark:text-gray-300">${country.gdp ? '$' + country.gdp.toLocaleString() + ' billion' : 'N/A'}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg dark:bg-gray-700">
+                        <h3 class="text-lg font-semibold dark:text-white mb-2"><i class="fas fa-book-open mr-2"></i>Additional Information</h3>
+                        <div class="dark:text-gray-300">
+                            <p>Loading information from Wikipedia...</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Set modal title
+                document.getElementById('detailsModalTitle').textContent = country.name.common;
+                
+                // Show modal
+                elements.countryDetailsModal.classList.remove('hidden');
+                
+                // Fetch Wikipedia data
+                fetchWikipediaData(country.name.common).then(info => {
+                    const infoDiv = elements.countryDetailsContent.querySelector('.bg-blue-50 div');
+                    if (infoDiv) {
+                        infoDiv.innerHTML = `<p>${info}</p>`;
+                    }
+                });
             }
 
             // Update map for selected country
@@ -818,133 +1149,53 @@
                     }
                 });
                 
+                // Add marker for capital if coordinates are available
                 if (lat !== 0 || lng !== 0) {
                     L.marker([lat, lng]).addTo(map)
                         .bindPopup(`<b>${country.name.common}</b><br>${country.capital ? 'Capital: ' + country.capital[0] : ''}`);
                 }
             }
 
-            // Load tourist places with images and more details
-            function loadTouristPlaces(country) {
-                const placesContainer = document.getElementById('touristPlaces');
-                placesContainer.innerHTML = '';
-                
-                // Mock data with images
-                const mockPlaces = {
-                    'France': [
-                        { 
-                            name: 'Eiffel Tower', 
-                            description: 'Iconic iron tower in Paris, one of the most recognized structures in the world.',
-                            image: 'https://images.unsplash.com/photo-1431274172761-fca41d930114?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'Louvre Museum', 
-                            description: 'World\'s largest art museum and a historic monument in Paris.',
-                            image: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'Mont Saint-Michel', 
-                            description: 'Island commune in Normandy with a stunning medieval abbey.',
-                            image: 'https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        }
-                    ],
-                    'Italy': [
-                        { 
-                            name: 'Colosseum', 
-                            description: 'Ancient amphitheater in Rome, the largest ever built.',
-                            image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'Venice Canals', 
-                            description: 'Famous waterways and architectural beauty of Venice.',
-                            image: 'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'Leaning Tower of Pisa', 
-                            description: 'Freestanding bell tower known for its unintended tilt.',
-                            image: 'https://images.unsplash.com/photo-1553615739-adee5694a9f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        }
-                    ],
-                    'Japan': [
-                        { 
-                            name: 'Mount Fuji', 
-                            description: 'Japan\'s tallest mountain and active volcano.',
-                            image: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'Tokyo Tower', 
-                            description: 'Communications and observation tower in Tokyo.',
-                            image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'Fushimi Inari Shrine', 
-                            description: 'Famous for its thousands of vermilion torii gates.',
-                            image: 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        }
-                    ],
-                    'USA': [
-                        { 
-                            name: 'Statue of Liberty', 
-                            description: 'Iconic symbol of freedom in New York Harbor.',
-                            image: 'https://images.unsplash.com/photo-1549861833-c5932fd19229?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'Grand Canyon', 
-                            description: 'Massive canyon carved by the Colorado River in Arizona.',
-                            image: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'Times Square', 
-                            description: 'Major commercial intersection in Midtown Manhattan.',
-                            image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        }
-                    ],
-                    'default': [
-                        { 
-                            name: 'Capital City', 
-                            description: 'The vibrant capital with rich history and culture.',
-                            image: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'National Museum', 
-                            description: 'Showcasing the country\'s heritage and artifacts.',
-                            image: 'https://images.unsplash.com/photo-1534008757030-27299c4371c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        },
-                        { 
-                            name: 'Main Square', 
-                            description: 'The heart of the city with stunning architecture.',
-                            image: 'https://images.unsplash.com/photo-1470004914212-05527e49370b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-                        }
-                    ]
-                };
-                
-                const places = mockPlaces[country.name.common] || mockPlaces['default'];
-                
-                places.forEach(place => {
-                    const placeElement = document.createElement('div');
-                    placeElement.className = 'place-card bg-white rounded-lg overflow-hidden shadow-md dark:bg-gray-700 dark:text-white';
-                    placeElement.innerHTML = `
-                        <div class="relative overflow-hidden">
-                            <img src="${place.image}" alt="${place.name}" class="w-full place-image">
-                        </div>
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-2">${place.name}</h4>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">${place.description}</p>
-                        </div>
-                    `;
-                    placesContainer.appendChild(placeElement);
-                });
+            // Fetch weather data
+            async function fetchWeatherData(city, countryCode) {
+                try {
+                    // Using OpenWeatherMap API (you would need to get your own API key)
+                    const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY'; // Replace with your actual API key
+                    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&units=metric&appid=${apiKey}`);
+                    const data = await response.json();
+                    
+                    if (data.cod === 200) {
+                        const weather = data.weather[0];
+                        const main = data.main;
+                        const wind = data.wind;
+                        
+                        document.getElementById('weatherCondition').textContent = weather.description;
+                        document.getElementById('weatherTemp').textContent = Math.round(main.temp);
+                        document.getElementById('weatherHumidity').textContent = main.humidity;
+                        document.getElementById('weatherWind').textContent = Math.round(wind.speed * 3.6); // Convert m/s to km/h
+                        
+                        // Set weather icon
+                        const icon = state.weatherIcons[weather.icon] || '☀️';
+                        document.getElementById('weatherIcon').textContent = icon;
+                    } else {
+                        // Fallback to mock data if API fails
+                        showMockWeather();
+                    }
+                } catch (error) {
+                    console.error('Error fetching weather data:', error);
+                    // Fallback to mock data if API fails
+                    showMockWeather();
+                }
             }
 
-            // Fetch weather data (mock for demo)
-            async function fetchWeatherData(city, countryCode) {
-                // Mock weather data with realistic values for demo
+            // Show mock weather data
+            function showMockWeather() {
                 const mockWeather = {
-                    condition: ['Sunny', 'Cloudy', 'Rainy', 'Partly Cloudy', 'Thunderstorm'][Math.floor(Math.random() * 5)],
+                    condition: ['Sunny', 'Cloudy', 'Rainy', 'Stormy'][Math.floor(Math.random() * 4)],
                     temp: Math.round(Math.random() * 30 + 10),
                     humidity: Math.round(Math.random() * 50 + 30),
                     wind: Math.round(Math.random() * 20 + 5),
-                    icon: ['☀️', '⛅', '🌧️', '☁️', '⛈️'][Math.floor(Math.random() * 5)]
+                    icon: ['☀️', '⛅', '🌧️', '⛈️'][Math.floor(Math.random() * 4)]
                 };
                 
                 document.getElementById('weatherCondition').textContent = mockWeather.condition;
@@ -957,29 +1208,17 @@
             // Fetch Wikipedia data for a country
             async function fetchWikipediaData(countryName) {
                 try {
-                    // Mock Wikipedia response with detailed information
-                    const mockResponses = {
-                        'France': `<p>France, officially the French Republic, is a country primarily located in Western Europe. It also includes overseas regions and territories in the Americas and the Atlantic, Pacific and Indian Oceans.</p>
-                                  <p class="mt-4">With an area of 643,801 square kilometers, France is the largest EU country and the third-largest in Europe. It has a population of 67 million people (as of 2023). France is a unitary semi-presidential republic with its capital in Paris, the country's largest city and main cultural and commercial center.</p>
-                                  <p class="mt-4">France has long been a global center of art, science, and philosophy. It hosts the world's fifth-largest number of UNESCO World Heritage Sites and is the leading tourist destination, receiving around 83 million foreign visitors annually.</p>`,
-                        'Italy': `<p>Italy, officially the Italian Republic, is a country in Southern and Western Europe. Located in the middle of the Mediterranean Sea, it consists of a peninsula delimited by the Alps and surrounded by several islands.</p>
-                                 <p class="mt-4">Italy covers an area of 301,340 km² and has a population of about 60 million. It is the third-most populous member state of the European Union. Its capital and largest city is Rome.</p>
-                                 <p class="mt-4">Italy has the eighth-largest nominal GDP in the world and is a founding member of the European Union. The country has a long history and cultural legacy, being home to the Roman Empire and the Renaissance.</p>`,
-                        'Japan': `<p>Japan is an island country in East Asia, located in the northwest Pacific Ocean. It is bordered by the Sea of Japan to the west and extends from the Sea of Okhotsk in the north to the East China Sea and Taiwan in the south.</p>
-                                 <p class="mt-4">Japan is the eleventh-most populous country in the world, as well as one of the most densely populated and urbanized. About three-fourths of the country's terrain is mountainous, concentrating its population of 125.7 million on narrow coastal plains.</p>
-                                 <p class="mt-4">Japan is a great power and a member of numerous international organizations, including the United Nations, the G7, and the OECD. The country has the world's third-largest economy by nominal GDP.</p>`,
-                        'USA': `<p>The United States of America (USA) is a country primarily located in North America. It consists of 50 states, a federal district, five major unincorporated territories, nine Minor Outlying Islands, and 326 Indian reservations.</p>
-                               <p class="mt-4">The U.S. is the world's third-largest country by both land and total area. With a population of over 331 million, it is the third most populous country in the world. The national capital is Washington, D.C., and the most populous city and financial center is New York City.</p>
-                               <p class="mt-4">The United States is a highly developed country, and its economy accounts for approximately a quarter of global GDP and is the world's largest by nominal GDP. It is a founding member of the United Nations, World Bank, IMF, and other international organizations.</p>`,
-                        'default': `<p>${countryName} is a sovereign nation with its own unique history, culture, and geography. While specific details may vary, all countries share common characteristics of governance, population, and territory.</p>
-                                   <p class="mt-4">Countries typically have their own systems of government, economic structures, and cultural traditions that make them distinct. They interact with other nations through diplomacy, trade, and international organizations.</p>
-                                   <p class="mt-4">To learn more about ${countryName}, consider visiting official government websites, tourism boards, or reputable news sources that specialize in coverage of this particular country.</p>`
-                    };
+                    const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(countryName)}`);
+                    const data = await response.json();
                     
-                    return mockResponses[countryName] || mockResponses['default'];
+                    if (data.extract) {
+                        return data.extract;
+                    } else {
+                        return `No additional information available for ${countryName} on Wikipedia.`;
+                    }
                 } catch (error) {
                     console.error('Error fetching Wikipedia data:', error);
-                    return `<p>Could not load information from Wikipedia. Please try again later.</p>`;
+                    return `Could not load information from Wikipedia. Please try again later.`;
                 }
             }
 
@@ -989,12 +1228,12 @@
                 
                 if (elements.moreInfoContent.classList.contains('hidden')) {
                     // Show loading state
-                    elements.wikipediaContent.innerHTML = '<p class="text-center py-4"><i class="fas fa-spinner fa-spin mr-2"></i>Loading information from Wikipedia...</p>';
+                    elements.wikipediaContent.innerHTML = '<p>Loading information from Wikipedia...</p>';
                     elements.moreInfoContent.classList.remove('hidden');
                     
                     // Fetch Wikipedia data
                     const info = await fetchWikipediaData(state.currentCountry.name.common);
-                    elements.wikipediaContent.innerHTML = info;
+                    elements.wikipediaContent.innerHTML = `<p>${info}</p>`;
                     
                     // Change button text/icon
                     this.innerHTML = `
@@ -1023,27 +1262,6 @@
                 }
             });
 
-            // Save country button handler
-            elements.saveCountry.addEventListener('click', function() {
-                if (!state.currentCountry) return;
-                
-                const index = state.savedCountries.findIndex(c => c.cca3 === state.currentCountry.cca3);
-                
-                if (index === -1) {
-                    // Add to saved
-                    state.savedCountries.push(state.currentCountry);
-                } else {
-                    // Remove from saved
-                    state.savedCountries.splice(index, 1);
-                }
-                
-                // Update UI
-                updateSaveButton();
-                
-                // Save to localStorage
-                localStorage.setItem('savedCountries', JSON.stringify(state.savedCountries));
-            });
-
             // Search autocomplete
             function populateSearchAutocomplete() {
                 elements.searchInput.addEventListener('input', function() {
@@ -1061,7 +1279,7 @@
                         elements.autocompleteResults.innerHTML = '';
                         matches.forEach(country => {
                             const item = document.createElement('div');
-                            item.className = 'p-3 hover:bg-gray-100 cursor-pointer flex items-center dark:hover:bg-gray-700 dark:text-white';
+                            item.className = 'p-3 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-700 dark:text-white flex items-center';
                             item.innerHTML = `
                                 <span class="mr-2">${country.flag}</span>
                                 ${country.name.common}
@@ -1092,23 +1310,22 @@
                 state.darkMode = !state.darkMode;
                 if (state.darkMode) {
                     document.documentElement.classList.add('dark');
-                    this.innerHTML = `
-                        <i class="fas fa-sun mr-1"></i>
-                        <span>${translations[state.language]?.light || 'Light'}</span>
-                    `;
+                    this.classList.add('dark');
                 } else {
                     document.documentElement.classList.remove('dark');
-                    this.innerHTML = `
-                        <i class="fas fa-moon mr-1"></i>
-                        <span>${translations[state.language]?.dark || 'Dark'}</span>
-                    `;
+                    this.classList.remove('dark');
                 }
                 
                 // Save preference to localStorage
                 localStorage.setItem('darkMode', state.darkMode);
             });
 
-            // Text-to-speech for country information
+            // Translator toggle
+            elements.translateToggle.addEventListener('click', function() {
+                elements.translateContainer.classList.toggle('expanded');
+            });
+
+            // Text-to-speech
             elements.speakButton.addEventListener('click', function() {
                 if (!state.currentCountry) return;
                 
@@ -1116,52 +1333,24 @@
                     // Stop speaking
                     window.speechSynthesis.cancel();
                     state.isSpeaking = false;
-                    elements.speakIcon.className = 'fas fa-volume-up text-blue-600 dark:text-blue-400';
+                    elements.speakIcon.className = 'fas fa-volume-up';
                     return;
                 }
                 
-                // Get all text to speak
-                let text = `Information about ${state.currentCountry.name.common}. `;
-                
-                // Basic info
-                text += `Capital: ${state.currentCountry.capital ? state.currentCountry.capital[0] : 'unknown'}. `;
-                text += `Population: ${state.currentCountry.population.toLocaleString()}. `;
-                text += `Area: ${state.currentCountry.area ? state.currentCountry.area.toLocaleString() : 'unknown'} square kilometers. `;
-                
-                // Weather
-                const weatherCondition = document.getElementById('weatherCondition').textContent;
-                const weatherTemp = document.getElementById('weatherTemp').textContent;
-                if (weatherCondition && weatherTemp) {
-                    text += `Current weather: ${weatherCondition} with temperature of ${weatherTemp} degrees Celsius. `;
-                }
-                
-                // More info if expanded
-                if (!elements.moreInfoContent.classList.contains('hidden')) {
-                    const moreInfoText = elements.wikipediaContent.textContent;
-                    if (moreInfoText && !moreInfoText.includes('Loading')) {
-                        text += `Additional information: ${moreInfoText.substring(0, 300)}...`; // Limit to 300 chars
-                    }
-                }
-                
-                // Tourist places
-                const places = Array.from(document.getElementById('touristPlaces').children);
-                if (places.length > 0) {
-                    text += `Popular tourist attractions include: `;
-                    places.slice(0, 3).forEach(place => {
-                        const name = place.querySelector('h4').textContent;
-                        text += `${name}, `;
-                    });
-                }
+                const text = `Information about ${state.currentCountry.name.common}. 
+                    Capital: ${state.currentCountry.capital ? state.currentCountry.capital[0] : 'unknown'}. 
+                    Population: ${state.currentCountry.population.toLocaleString()}. 
+                    Area: ${state.currentCountry.area ? state.currentCountry.area.toLocaleString() : 'unknown'} square kilometers.`;
                 
                 if ('speechSynthesis' in window) {
                     const utterance = new SpeechSynthesisUtterance(text);
                     utterance.onend = function() {
                         state.isSpeaking = false;
-                        elements.speakIcon.className = 'fas fa-volume-up text-blue-600 dark:text-blue-400';
+                        elements.speakIcon.className = 'fas fa-volume-up';
                     };
                     window.speechSynthesis.speak(utterance);
                     state.isSpeaking = true;
-                    elements.speakIcon.className = 'fas fa-stop text-red-600 dark:text-red-400';
+                    elements.speakIcon.className = 'fas fa-volume-mute';
                 } else {
                     alert('Text-to-speech not supported in your browser');
                 }
@@ -1195,46 +1384,92 @@
                 doc.text(`GDP: $${state.currentCountry.gdp ? state.currentCountry.gdp.toLocaleString() : 'N/A'} billion`, 10, y);
                 y += 10;
                 doc.text(`Military Rank: ${state.currentCountry.militaryRank ? '#' + state.currentCountry.militaryRank : 'N/A'}`, 10, y);
-                y += 10;
+                y += 20;
                 
-                // Add weather info if available
-                const weatherCondition = document.getElementById('weatherCondition').textContent;
-                const weatherTemp = document.getElementById('weatherTemp').textContent;
-                if (weatherCondition !== '-' && weatherTemp !== '-') {
-                    doc.text(`Current Weather: ${weatherCondition}, ${weatherTemp}°C`, 10, y);
+                // Add Wikipedia information if available
+                const wikiContent = elements.wikipediaContent.textContent;
+                if (wikiContent && !wikiContent.includes('Loading')) {
+                    doc.setFontSize(14);
+                    doc.text('Additional Information:', 10, y);
                     y += 10;
+                    doc.setFontSize(10);
+                    const splitText = doc.splitTextToSize(wikiContent, 180);
+                    doc.text(splitText, 10, y);
                 }
-                
-                // Add more info if expanded
-                if (!elements.moreInfoContent.classList.contains('hidden')) {
-                    const moreInfoText = elements.wikipediaContent.textContent;
-                    if (moreInfoText && !moreInfoText.includes('Loading')) {
-                        doc.text('Additional Information:', 10, y);
-                        y += 7;
-                        const splitText = doc.splitTextToSize(moreInfoText.substring(0, 500), 180); // Limit to 500 chars
-                        doc.text(splitText, 10, y);
-                        y += splitText.length * 7;
-                    }
-                }
-                
-                // Add most visited places
-                doc.text('Most Visited Places:', 10, y + 10);
-                y += 15;
-                const placesContainer = document.getElementById('touristPlaces');
-                const places = Array.from(placesContainer.children).map(el => el.querySelector('h4').textContent);
-                places.forEach((place, i) => {
-                    doc.text(`${i+1}. ${place}`, 15, y);
-                    y += 7;
-                });
                 
                 // Save the PDF
                 doc.save(`${state.currentCountry.name.common}_information.pdf`);
             });
 
+            // Save country button
+            elements.saveCountryButton.addEventListener('click', toggleSaveCountry);
+
+            // Saved countries navigation
+            elements.savedCountriesNav.addEventListener('click', function() {
+                renderSavedCountries();
+                elements.savedCountriesModal.classList.remove('hidden');
+            });
+
+            // Close saved countries modal
+            elements.closeSavedModal.addEventListener('click', function() {
+                elements.savedCountriesModal.classList.add('hidden');
+            });
+
+            // Country details navigation
+            elements.countryDetailsNav.addEventListener('click', function() {
+                if (state.currentCountry) {
+                    showCountryDetailsModal(state.currentCountry);
+                } else {
+                    alert('Please select a country first');
+                }
+            });
+
+            // Close country details modal
+            elements.closeDetailsModal.addEventListener('click', function() {
+                elements.countryDetailsModal.classList.add('hidden');
+            });
+
+            // Download country details as PDF
+            elements.downloadDetailsButton.addEventListener('click', function() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Add country name as title
+                doc.setFontSize(20);
+                doc.text(`Country Details: ${state.currentCountry.name.common}`, 10, 20);
+                
+                // Add basic information
+                doc.setFontSize(12);
+                let y = 40;
+                doc.text(`Capital: ${state.currentCountry.capital ? state.currentCountry.capital[0] : 'N/A'}`, 10, y);
+                y += 10;
+                doc.text(`Population: ${state.currentCountry.population.toLocaleString()}`, 10, y);
+                y += 10;
+                doc.text(`Area: ${state.currentCountry.area ? state.currentCountry.area.toLocaleString() : 'N/A'} km²`, 10, y);
+                y += 10;
+                doc.text(`Languages: ${state.currentCountry.languages ? Object.values(state.currentCountry.languages).join(', ') : 'N/A'}`, 10, y);
+                y += 10;
+                doc.text(`GDP: $${state.currentCountry.gdp ? state.currentCountry.gdp.toLocaleString() : 'N/A'} billion`, 10, y);
+                y += 20;
+                
+                // Add Wikipedia information if available
+                const wikiContent = elements.countryDetailsContent.querySelector('.bg-blue-50 div')?.textContent;
+                if (wikiContent && !wikiContent.includes('Loading')) {
+                    doc.setFontSize(14);
+                    doc.text('Additional Information:', 10, y);
+                    y += 10;
+                    doc.setFontSize(10);
+                    const splitText = doc.splitTextToSize(wikiContent, 180);
+                    doc.text(splitText, 10, y);
+                }
+                
+                // Save the PDF
+                doc.save(`${state.currentCountry.name.common}_details.pdf`);
+            });
+
             // AI Assistant
             elements.aiButton.addEventListener('click', function() {
                 elements.aiModal.classList.remove('hidden');
-                elements.aiQuery.focus();
             });
 
             elements.closeAiModal.addEventListener('click', function() {
@@ -1277,48 +1512,17 @@
                     countryName = countryMatch[2].trim();
                 }
                 
-                // Generate AI response
+                // Fetch Wikipedia data for response
                 let response = '';
                 if (countryName) {
                     try {
-                        // First try to find exact match in our data
-                        const country = state.countries.find(c => 
-                            c.name.common.toLowerCase() === countryName.toLowerCase() ||
-                            c.name.official.toLowerCase() === countryName.toLowerCase()
-                        );
-                        
-                        if (country) {
-                            // Generate detailed response using country data
-                            response = generateCountryResponse(country);
-                        } else {
-                            // Fallback to Wikipedia
-                            const wikiData = await fetchWikipediaData(countryName);
-                            response = `Here's some information about ${countryName} from Wikipedia:\n\n${wikiData}`;
-                        }
+                        const wikiData = await fetchWikipediaData(countryName);
+                        response = `Here's some information about ${countryName} from Wikipedia:\n\n${wikiData}`;
                     } catch (error) {
-                        response = `I couldn't find detailed information about ${countryName}. Please try another country or ask a more specific question.`;
+                        response = `I couldn't find information about ${countryName}. Please try another country.`;
                     }
-                } else if (query.toLowerCase().includes('compare') && query.toLowerCase().includes('and')) {
-                    // Handle comparison questions
-                    response = handleComparisonQuery(query);
-                } else if (query.toLowerCase().includes('currency') || query.toLowerCase().includes('exchange rate')) {
-                    // Handle currency questions
-                    response = handleCurrencyQuery(query);
-                } else if (query.toLowerCase().includes('weather') && state.currentCountry) {
-                    // Handle weather questions
-                    response = handleWeatherQuery(state.currentCountry);
-                } else if (query.toLowerCase().includes('tourist') || query.toLowerCase().includes('visit') || query.toLowerCase().includes('attraction')) {
-                    // Handle tourist questions
-                    response = handleTouristQuery(state.currentCountry);
                 } else {
-                    // General response
-                    response = "I'm an AI assistant that can provide information about countries. You can ask me about:\n\n" +
-                               "- Specific countries (e.g., 'Tell me about France')\n" +
-                               "- Comparisons between countries (e.g., 'Compare India and China')\n" +
-                               "- Currency exchange rates\n" +
-                               "- Weather information\n" +
-                               "- Tourist attractions\n\n" +
-                               "Please ask me a specific question about any country!";
+                    response = "I'm an AI assistant that can provide information about countries. Please ask me about a specific country, for example: 'Tell me about France' or 'What is the capital of Japan?'";
                 }
                 
                 // Remove typing indicator
@@ -1326,10 +1530,10 @@
                 
                 // Add AI response to chat
                 const aiElement = document.createElement('div');
-                aiElement.className = 'mb-2 text-left ai-response';
+                aiElement.className = 'mb-2 text-left';
                 aiElement.innerHTML = `
                     <span class="inline-block bg-gray-100 text-gray-800 px-3 py-1 rounded-lg dark:bg-gray-700 dark:text-gray-300">
-                        ${response.replace(/\n/g, '<br>')}
+                        ${response}
                     </span>
                 `;
                 elements.aiResponse.appendChild(aiElement);
@@ -1339,273 +1543,16 @@
                 elements.aiResponse.scrollTop = elements.aiResponse.scrollHeight;
             });
 
-            // Generate detailed country response
-            function generateCountryResponse(country) {
-                let response = `Here's detailed information about <strong>${country.name.common}</strong>:\n\n`;
-                
-                // Basic info
-                response += `<strong>Capital:</strong> ${country.capital ? country.capital[0] : 'N/A'}\n`;
-                response += `<strong>Population:</strong> ${country.population.toLocaleString()}\n`;
-                response += `<strong>Area:</strong> ${country.area ? country.area.toLocaleString() : 'N/A'} km²\n`;
-                response += `<strong>Languages:</strong> ${country.languages ? Object.values(country.languages).join(', ') : 'N/A'}\n`;
-                response += `<strong>Currency:</strong> ${country.currencies ? Object.values(country.currencies).map(c => `${c.name} (${c.symbol || ''})`).join(', ') : 'N/A'}\n\n`;
-                
-                // Additional info
-                response += `<strong>Interesting Facts:</strong>\n`;
-                response += `- ${country.name.common} is located in ${country.region}${country.subregion ? ` (${country.subregion})` : ''}\n`;
-                response += `- The country gained independence in ${country.independent ? country.independent : 'unknown year'}\n`;
-                response += `- It's known for ${getCountrySpecialty(country.name.common)}\n\n`;
-                
-                // Travel info
-                response += `<strong>Travel Information:</strong>\n`;
-                response += `- Visa requirements: ${country.visa || 'Check with local embassy'}\n`;
-                response += `- Popular tourist attractions: ${getTouristAttractions(country.name.common).join(', ')}\n`;
-                
-                return response;
-            }
-
-            // Get country specialty (mock data)
-            function getCountrySpecialty(countryName) {
-                const specialties = {
-                    'France': 'its wine, cheese, and fashion industry',
-                    'Italy': 'pasta, pizza, and Renaissance art',
-                    'Japan': 'sushi, anime, and technology',
-                    'USA': 'Hollywood, fast food, and diverse landscapes',
-                    'Brazil': 'samba, football, and the Amazon rainforest',
-                    'India': 'spices, Bollywood, and ancient history',
-                    'China': 'the Great Wall, pandas, and martial arts',
-                    'Egypt': 'the pyramids, ancient civilization, and the Nile River',
-                    'Australia': 'kangaroos, beaches, and the Outback',
-                    'Canada': 'maple syrup, hockey, and natural beauty'
-                };
-                
-                return specialties[countryName] || 'its unique culture and history';
-            }
-
-            // Get tourist attractions (mock data)
-            function getTouristAttractions(countryName) {
-                const attractions = {
-                    'France': ['Eiffel Tower', 'Louvre Museum', 'Mont Saint-Michel'],
-                    'Italy': ['Colosseum', 'Venice Canals', 'Leaning Tower of Pisa'],
-                    'Japan': ['Mount Fuji', 'Tokyo Tower', 'Fushimi Inari Shrine'],
-                    'USA': ['Statue of Liberty', 'Grand Canyon', 'Times Square'],
-                    'Brazil': ['Christ the Redeemer', 'Amazon Rainforest', 'Iguazu Falls'],
-                    'India': ['Taj Mahal', 'Golden Temple', 'Goa Beaches'],
-                    'China': ['Great Wall', 'Forbidden City', 'Terracotta Army'],
-                    'Egypt': ['Pyramids of Giza', 'Valley of the Kings', 'Nile River'],
-                    'Australia': ['Sydney Opera House', 'Great Barrier Reef', 'Uluru'],
-                    'Canada': ['Niagara Falls', 'Banff National Park', 'CN Tower']
-                };
-                
-                return attractions[countryName] || ['capital city', 'national museums', 'local landmarks'];
-            }
-
-            // Handle comparison questions
-            function handleComparisonQuery(query) {
-                // Extract country names from query
-                const countries = query.match(/(compare|between|and)\s+([^\?]+)/i)[2]
-                    .split(/(?:,|and|vs\.?|\/)/)
-                    .map(s => s.trim())
-                    .filter(s => s.length > 0);
-                
-                if (countries.length !== 2) {
-                    return "Please specify exactly two countries to compare, like 'Compare France and Germany'.";
-                }
-                
-                // Find countries in our data
-                const country1 = state.countries.find(c => 
-                    c.name.common.toLowerCase() === countries[0].toLowerCase() ||
-                    c.name.official.toLowerCase() === countries[0].toLowerCase()
-                );
-                
-                const country2 = state.countries.find(c => 
-                    c.name.common.toLowerCase() === countries[1].toLowerCase() ||
-                    c.name.official.toLowerCase() === countries[1].toLowerCase()
-                );
-                
-                if (!country1 || !country2) {
-                    return `I couldn't find both countries. Please make sure you've spelled the names correctly.`;
-                }
-                
-                // Generate comparison
-                let response = `Comparison between <strong>${country1.name.common}</strong> and <strong>${country2.name.common}</strong>:\n\n`;
-                
-                // Population
-                const popDiff = country1.population - country2.population;
-                response += `<strong>Population:</strong>\n`;
-                response += `- ${country1.name.common}: ${country1.population.toLocaleString()}\n`;
-                response += `- ${country2.name.common}: ${country2.population.toLocaleString()}\n`;
-                response += `- Difference: ${Math.abs(popDiff).toLocaleString()} ${popDiff > 0 ? 'more' : 'less'}\n\n`;
-                
-                // Area
-                const areaDiff = country1.area - country2.area;
-                response += `<strong>Area:</strong>\n`;
-                response += `- ${country1.name.common}: ${country1.area ? country1.area.toLocaleString() : 'N/A'} km²\n`;
-                response += `- ${country2.name.common}: ${country2.area ? country2.area.toLocaleString() : 'N/A'} km²\n`;
-                if (country1.area && country2.area) {
-                    response += `- Difference: ${Math.abs(areaDiff).toLocaleString()} km² ${areaDiff > 0 ? 'larger' : 'smaller'}\n\n`;
-                } else {
-                    response += `\n`;
-                }
-                
-                // GDP
-                if (country1.gdp && country2.gdp) {
-                    const gdpDiff = country1.gdp - country2.gdp;
-                    response += `<strong>GDP (nominal):</strong>\n`;
-                    response += `- ${country1.name.common}: $${country1.gdp.toLocaleString()} billion\n`;
-                    response += `- ${country2.name.common}: $${country2.gdp.toLocaleString()} billion\n`;
-                    response += `- Difference: $${Math.abs(gdpDiff).toLocaleString()} billion ${gdpDiff > 0 ? 'higher' : 'lower'}\n\n`;
-                }
-                
-                // Military
-                if (country1.militaryRank && country2.militaryRank) {
-                    const rankDiff = country1.militaryRank - country2.militaryRank;
-                    response += `<strong>Military Strength Rank:</strong>\n`;
-                    response += `- ${country1.name.common}: #${country1.militaryRank}\n`;
-                    response += `- ${country2.name.common}: #${country2.militaryRank}\n`;
-                    response += `- Difference: ${Math.abs(rankDiff)} positions ${rankDiff < 0 ? 'higher' : 'lower'} in ranking\n\n`;
-                }
-                
-                return response;
-            }
-
-            // Handle currency questions
-            function handleCurrencyQuery(query) {
-                if (!state.currentCountry) {
-                    return "Please select a country first to get currency information.";
-                }
-                
-                // Check if asking for specific conversion
-                const amountMatch = query.match(/(\d+)\s+(\w+)\s+to\s+(\w+)/i);
-                if (amountMatch && state.exchangeRates) {
-                    const amount = parseFloat(amountMatch[1]);
-                    const fromCurrency = amountMatch[2].toUpperCase();
-                    const toCurrency = amountMatch[3].toUpperCase();
-                    
-                    if (state.exchangeRates[fromCurrency] && state.exchangeRates[toCurrency]) {
-                        const rate = state.exchangeRates[toCurrency] / state.exchangeRates[fromCurrency];
-                        const result = amount * rate;
-                        return `${amount} ${fromCurrency} = ${result.toFixed(2)} ${toCurrency}`;
-                    }
-                }
-                
-                // General currency info
-                if (state.currentCountry.currencies) {
-                    const currencies = Object.values(state.currentCountry.currencies);
-                    let response = `<strong>Currency in ${state.currentCountry.name.common}:</strong>\n`;
-                    
-                    currencies.forEach(currency => {
-                        response += `- ${currency.name} (${currency.symbol || 'no symbol'})\n`;
-                        
-                        // Add exchange rates if available
-                        if (state.exchangeRates && currency.name.includes('Dollar')) {
-                            const code = Object.keys(state.currentCountry.currencies)[0];
-                            if (state.exchangeRates[code]) {
-                                response += `  Current exchange rate: 1 ${code} = ${state.exchangeRates[code].toFixed(2)} USD\n`;
-                            }
-                        }
-                    });
-                    
-                    return response;
-                }
-                
-                return `I couldn't find currency information for ${state.currentCountry.name.common}.`;
-            }
-
-            // Handle weather questions
-            function handleWeatherQuery(country) {
-                if (!country) {
-                    return "Please select a country first to get weather information.";
-                }
-                
-                const condition = document.getElementById('weatherCondition').textContent;
-                const temp = document.getElementById('weatherTemp').textContent;
-                const humidity = document.getElementById('weatherHumidity').textContent;
-                const wind = document.getElementById('weatherWind').textContent;
-                
-                if (condition === '-' || temp === '-') {
-                    return `I couldn't retrieve current weather for ${country.name.common}. Please try again later.`;
-                }
-                
-                return `Current weather in ${country.capital ? country.capital[0] : country.name.common}:\n\n` +
-                       `- Condition: ${condition}\n` +
-                       `- Temperature: ${temp}°C\n` +
-                       `- Humidity: ${humidity}%\n` +
-                       `- Wind: ${wind} km/h\n\n` +
-                       `Weather information is for the capital city and may vary across the country.`;
-            }
-
-            // Handle tourist questions
-            function handleTouristQuery(country) {
-                if (!country) {
-                    return "Please select a country first to get tourist information.";
-                }
-                
-                const attractions = getTouristAttractions(country.name.common);
-                
-                let response = `Top tourist attractions in <strong>${country.name.common}</strong>:\n\n`;
-                attractions.forEach((attraction, index) => {
-                    response += `${index + 1}. ${attraction}\n`;
-                });
-                
-                response += `\nOther travel information:\n` +
-                            `- Visa requirements: ${country.visa || 'Check with local embassy'}\n` +
-                            `- Best time to visit: ${getBestTimeToVisit(country.name.common)}\n` +
-                            `- Local cuisine: ${getLocalCuisine(country.name.common)}\n`;
-                
-                return response;
-            }
-
-            // Get best time to visit (mock data)
-            function getBestTimeToVisit(countryName) {
-                const bestTimes = {
-                    'France': 'April to June and September to November',
-                    'Italy': 'April to June and September to October',
-                    'Japan': 'March to May (cherry blossoms) and September to November',
-                    'USA': 'Depends on region - generally spring and fall',
-                    'Brazil': 'April to June and August to October',
-                    'India': 'October to March',
-                    'China': 'April to May and September to October',
-                    'Egypt': 'October to April',
-                    'Australia': 'September to November and March to May',
-                    'Canada': 'June to August for summer, December to March for winter sports'
-                };
-                
-                return bestTimes[countryName] || 'spring and autumn months';
-            }
-
-            // Get local cuisine (mock data)
-            function getLocalCuisine(countryName) {
-                const cuisines = {
-                    'France': 'French cuisine with wines, cheeses, and pastries',
-                    'Italy': 'Italian cuisine with pasta, pizza, and gelato',
-                    'Japan': 'Japanese cuisine with sushi, ramen, and tempura',
-                    'USA': 'American cuisine with burgers, BBQ, and diverse international options',
-                    'Brazil': 'Brazilian cuisine with feijoada, churrasco, and tropical fruits',
-                    'India': 'Indian cuisine with curries, naan, and diverse regional dishes',
-                    'China': 'Chinese cuisine with dim sum, Peking duck, and regional specialties',
-                    'Egypt': 'Egyptian cuisine with koshari, ful medames, and falafel',
-                    'Australia': 'Australian cuisine with meat pies, seafood, and multicultural influences',
-                    'Canada': 'Canadian cuisine with poutine, maple syrup, and seafood'
-                };
-                
-                return cuisines[countryName] || 'local specialties and traditional dishes';
-            }
-
-            // Populate comparison selects
-            function populateComparisonSelects() {
-                const select1 = document.getElementById('compareCountry1');
-                const select2 = document.getElementById('compareCountry2');
-                
-                select1.innerHTML = '';
-                select2.innerHTML = '';
+            // Populate comparison select
+            function populateComparisonSelect() {
+                const select = document.getElementById('compareCountry');
+                select.innerHTML = '';
                 
                 // Add empty option
                 const emptyOption = document.createElement('option');
                 emptyOption.value = '';
                 emptyOption.textContent = 'Select country';
-                select1.appendChild(emptyOption.cloneNode(true));
-                select2.appendChild(emptyOption.cloneNode(true));
+                select.appendChild(emptyOption);
                 
                 // Sort countries A-Z
                 const sortedCountries = [...state.countries].sort((a, b) => 
@@ -1617,25 +1564,22 @@
                     const option = document.createElement('option');
                     option.value = country.cca3;
                     option.textContent = country.name.common;
-                    select1.appendChild(option.cloneNode(true));
-                    select2.appendChild(option.cloneNode(true));
+                    select.appendChild(option);
                 });
                 
                 // Compare button handler
                 document.getElementById('compareButton').addEventListener('click', function() {
-                    const country1Code = select1.value;
-                    const country2Code = select2.value;
+                    const countryCode = select.value;
                     
-                    if (!country1Code || !country2Code) {
-                        alert('Please select two countries to compare');
+                    if (!countryCode || !state.currentCountry) {
+                        alert('Please select a country to compare with');
                         return;
                     }
                     
-                    const country1 = state.countries.find(c => c.cca3 === country1Code);
-                    const country2 = state.countries.find(c => c.cca3 === country2Code);
+                    const country = state.countries.find(c => c.cca3 === countryCode);
                     
-                    if (country1 && country2) {
-                        showComparisonResults(country1, country2);
+                    if (country) {
+                        showComparisonResults(state.currentCountry, country);
                     }
                 });
             }
@@ -1643,166 +1587,148 @@
             // Show comparison results
             function showComparisonResults(country1, country2) {
                 const resultsDiv = document.getElementById('comparisonResults');
-                resultsDiv.innerHTML = '';
-                resultsDiv.classList.remove('hidden');
+                const tableBody = document.getElementById('comparisonTableBody');
                 
-                // Create comparison table
-                const table = document.createElement('table');
-                table.className = 'min-w-full divide-y divide-gray-200 dark:divide-gray-700';
+                // Update headers
+                document.getElementById('currentCountryHeader').textContent = country1.name.common;
+                document.getElementById('comparedCountryHeader').textContent = country2.name.common;
                 
-                // Table header
-                const thead = document.createElement('thead');
-                thead.className = 'bg-gray-50 dark:bg-gray-700';
-                thead.innerHTML = `
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Metric</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">${country1.name.common}</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">${country2.name.common}</th>
-                    </tr>
-                `;
-                table.appendChild(thead);
-                
-                // Table body
-                const tbody = document.createElement('tbody');
-                tbody.className = 'bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-800';
+                // Clear existing rows
+                tableBody.innerHTML = '';
                 
                 // Add comparison rows
-                addComparisonRow(tbody, 'Population', country1.population, country2.population);
-                addComparisonRow(tbody, 'Area (km²)', country1.area, country2.area);
-                addComparisonRow(tbody, 'Capital', country1.capital ? country1.capital[0] : 'N/A', country2.capital ? country2.capital[0] : 'N/A');
-                addComparisonRow(tbody, 'GDP (billion $)', country1.gdp, country2.gdp);
-                addComparisonRow(tbody, 'Military Strength Rank', country1.militaryRank, country2.militaryRank);
+                addComparisonRow(tableBody, 'Population', country1.population, country2.population, 'fas fa-users');
+                addComparisonRow(tableBody, 'Area (km²)', country1.area, country2.area, 'fas fa-ruler-combined');
+                addComparisonRow(tableBody, 'Capital', country1.capital ? country1.capital[0] : 'N/A', country2.capital ? country2.capital[0] : 'N/A', 'fas fa-city');
+                addComparisonRow(tableBody, 'Languages', country1.languages ? Object.values(country1.languages).join(', ') : 'N/A', country2.languages ? Object.values(country2.languages).join(', ') : 'N/A', 'fas fa-language');
+                addComparisonRow(tableBody, 'GDP (billion $)', country1.gdp, country2.gdp, 'fas fa-chart-line');
+                addComparisonRow(tableBody, 'Military Rank', country1.militaryRank, country2.militaryRank, 'fas fa-shield-alt');
                 
-                table.appendChild(tbody);
-                resultsDiv.appendChild(table);
+                // Show results
+                resultsDiv.classList.remove('hidden');
             }
 
             // Add a row to comparison table
-            function addComparisonRow(tbody, metric, value1, value2) {
+            function addComparisonRow(tbody, metric, value1, value2, icon) {
                 const row = document.createElement('tr');
                 row.className = 'dark:bg-gray-800';
                 
-                // Format values
-                let display1 = value1;
-                let display2 = value2;
+                // Metric cell
+                const metricCell = document.createElement('td');
+                metricCell.className = 'px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white flex items-center';
+                metricCell.innerHTML = `<i class="${icon} mr-2"></i>${metric}`;
+                row.appendChild(metricCell);
                 
-                if (typeof value1 === 'number') {
-                    display1 = value1.toLocaleString();
-                    display2 = value2.toLocaleString();
+                // Value 1 cell
+                const value1Cell = document.createElement('td');
+                value1Cell.className = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300';
+                
+                // Value 2 cell
+                const value2Cell = document.createElement('td');
+                value2Cell.className = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300';
+                
+                if (typeof value1 === 'number' && typeof value2 === 'number') {
+                    // Format numbers
+                    value1Cell.textContent = value1.toLocaleString();
+                    value2Cell.textContent = value2.toLocaleString();
                     
                     // Add comparison indicator
                     if (value1 > value2) {
-                        display1 += ' ▲';
-                        display2 += ' ▼';
+                        value1Cell.innerHTML += ' <span class="text-green-500">▲</span>';
+                        value2Cell.innerHTML += ' <span class="text-red-500">▼</span>';
                     } else if (value1 < value2) {
-                        display1 += ' ▼';
-                        display2 += ' ▲';
+                        value1Cell.innerHTML += ' <span class="text-red-500">▼</span>';
+                        value2Cell.innerHTML += ' <span class="text-green-500">▲</span>';
                     } else {
-                        display1 += ' =';
-                        display2 += ' =';
+                        value1Cell.innerHTML += ' <span class="text-gray-500">=</span>';
+                        value2Cell.innerHTML += ' <span class="text-gray-500">=</span>';
                     }
+                } else {
+                    // Non-numeric values
+                    value1Cell.textContent = value1;
+                    value2Cell.textContent = value2;
                 }
                 
-                row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">${metric}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">${display1}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">${display2}</td>
-                `;
+                row.appendChild(value1Cell);
+                row.appendChild(value2Cell);
                 tbody.appendChild(row);
             }
 
-            // Populate currency selects
-            function populateCurrencySelects() {
-                const fromSelect = document.getElementById('convertFrom');
-                const toSelect = document.getElementById('convertTo');
-                
-                // Get unique currencies from all countries
-                const currencies = new Set();
-                state.countries.forEach(country => {
-                    if (country.currencies) {
-                        Object.keys(country.currencies).forEach(code => {
-                            currencies.add(`${code} - ${country.currencies[code].name}`);
-                        });
-                    }
-                });
-                
-                // Convert to array and sort A-Z
-                const sortedCurrencies = Array.from(currencies).sort();
-                
-                // Add to selects
-                fromSelect.innerHTML = '';
-                toSelect.innerHTML = '';
+            // Populate currency select
+            function populateCurrencySelect() {
+                const select = document.getElementById('convertCountry');
+                select.innerHTML = '';
                 
                 // Add empty option
                 const emptyOption = document.createElement('option');
                 emptyOption.value = '';
-                emptyOption.textContent = 'Select currency';
-                fromSelect.appendChild(emptyOption.cloneNode(true));
-                toSelect.appendChild(emptyOption.cloneNode(true));
+                emptyOption.textContent = 'Select country';
+                select.appendChild(emptyOption);
                 
-                // Add currencies
-                sortedCurrencies.forEach(currency => {
-                    const option = document.createElement('option');
-                    option.value = currency.split(' - ')[0]; // Use currency code
-                    option.textContent = currency;
-                    fromSelect.appendChild(option.cloneNode(true));
-                    toSelect.appendChild(option.cloneNode(true));
-                });
+                // Sort countries A-Z
+                const sortedCountries = [...state.countries].sort((a, b) => 
+                    a.name.common.localeCompare(b.name.common)
+                );
                 
-                // Set default to USD and BDT
-                Array.from(fromSelect.options).forEach(opt => {
-                    if (opt.value === 'USD') opt.selected = true;
-                });
-                Array.from(toSelect.options).forEach(opt => {
-                    if (opt.value === 'BDT') opt.selected = true;
+                // Add all countries
+                sortedCountries.forEach(country => {
+                    if (country.currencies) {
+                        const option = document.createElement('option');
+                        option.value = country.cca3;
+                        option.textContent = country.name.common;
+                        select.appendChild(option);
+                    }
                 });
                 
                 // Convert button handler
                 document.getElementById('convertButton').addEventListener('click', async function() {
-                    const amount = parseFloat(document.getElementById('convertAmount').value);
-                    const fromCurrency = fromSelect.value;
-                    const toCurrency = toSelect.value;
+                    const countryCode = select.value;
                     
-                    if (!amount || !fromCurrency || !toCurrency) {
-                        alert('Please fill all fields');
+                    if (!countryCode || !state.currentCountry) {
+                        alert('Please select a country to convert with');
                         return;
                     }
                     
-                    // Try to use real exchange rates first
-                    if (state.exchangeRates[fromCurrency] && state.exchangeRates[toCurrency]) {
-                        const rate = state.exchangeRates[toCurrency] / state.exchangeRates[fromCurrency];
-                        const result = amount * rate;
-                        const resultDiv = document.getElementById('conversionResult');
-                        resultDiv.innerHTML = `
-                            ${amount} ${fromCurrency} = ${result.toFixed(2)} ${toCurrency}
-                        `;
-                        resultDiv.classList.remove('hidden');
-                        return;
+                    const country = state.countries.find(c => c.cca3 === countryCode);
+                    
+                    if (country && country.currencies && state.currentCountry.currencies) {
+                        const fromCurrency = Object.keys(state.currentCountry.currencies)[0];
+                        const toCurrency = Object.keys(country.currencies)[0];
+                        
+                        // Try to use real exchange rates first
+                        if (state.exchangeRates[fromCurrency] && state.exchangeRates[toCurrency]) {
+                            const rate = state.exchangeRates[toCurrency] / state.exchangeRates[fromCurrency];
+                            const result = 1 * rate;
+                            
+                            document.getElementById('conversionFrom').textContent = `1 ${fromCurrency} =`;
+                            document.getElementById('conversionTo').textContent = `${result.toFixed(4)} ${toCurrency}`;
+                            document.getElementById('conversionRate').textContent = `Exchange rate: 1 ${fromCurrency} = ${rate.toFixed(6)} ${toCurrency}`;
+                            document.getElementById('conversionResult').classList.remove('hidden');
+                            return;
+                        }
+                        
+                        // Fallback to mock rates if real rates not available
+                        const mockRates = {
+                            'USD': { 'BDT': 110, 'EUR': 0.85, 'JPY': 110 },
+                            'EUR': { 'USD': 1.18, 'BDT': 130, 'JPY': 130 },
+                            'BDT': { 'USD': 0.0091, 'EUR': 0.0077, 'JPY': 0.12 },
+                            'JPY': { 'USD': 0.0091, 'EUR': 0.0077, 'BDT': 1.2 }
+                        };
+                        
+                        let rate = 1;
+                        if (mockRates[fromCurrency] && mockRates[fromCurrency][toCurrency]) {
+                            rate = mockRates[fromCurrency][toCurrency];
+                        } else if (mockRates[toCurrency] && mockRates[toCurrency][fromCurrency]) {
+                            rate = 1 / mockRates[toCurrency][fromCurrency];
+                        } else {
+                            rate = Math.random() * 10; // Fallback random rate
+                        }
+                        
+                        document.getElementById('conversionFrom').textContent = `1 ${fromCurrency} =`;
+                        document.getElementById('conversionTo').textContent = `${rate.toFixed(4)} ${toCurrency}`;
+                        document.getElementById('conversionRate').textContent = `Exchange rate: 1 ${fromCurrency} = ${rate.toFixed(6)} ${toCurrency}`;
+                        document.getElementById('conversionResult').classList.remove('hidden');
                     }
-                    
-                    // Fallback to mock rates if real rates not available
-                    const mockRates = {
-                        'USD': { 'BDT': 110, 'EUR': 0.85, 'JPY': 110 },
-                        'EUR': { 'USD': 1.18, 'BDT': 130, 'JPY': 130 },
-                        'BDT': { 'USD': 0.0091, 'EUR': 0.0077, 'JPY': 0.12 },
-                        'JPY': { 'USD': 0.0091, 'EUR': 0.0077, 'BDT': 1.2 }
-                    };
-                    
-                    let rate = 1;
-                    if (mockRates[fromCurrency] && mockRates[fromCurrency][toCurrency]) {
-                        rate = mockRates[fromCurrency][toCurrency];
-                    } else if (mockRates[toCurrency] && mockRates[toCurrency][fromCurrency]) {
-                        rate = 1 / mockRates[toCurrency][fromCurrency];
-                    } else {
-                        rate = Math.random() * 10; // Fallback random rate
-                    }
-                    
-                    const result = amount * rate;
-                    const resultDiv = document.getElementById('conversionResult');
-                    resultDiv.innerHTML = `
-                        ${amount} ${fromCurrency} = ${result.toFixed(2)} ${toCurrency}
-                    `;
-                    resultDiv.classList.remove('hidden');
                 });
             }
 
@@ -1810,21 +1736,18 @@
             if (localStorage.getItem('darkMode') === 'true') {
                 state.darkMode = true;
                 document.documentElement.classList.add('dark');
-                elements.darkModeToggle.innerHTML = `
-                    <i class="fas fa-sun mr-1"></i>
-                    <span>${translations[state.language]?.light || 'Light'}</span>
-                `;
+                elements.darkModeToggle.classList.add('dark');
             }
             
-            // Apply initial translations
-            applyTranslations(state.language);
-            
-            // Handle Enter key in AI query
-            elements.aiQuery.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    elements.aiSubmit.click();
-                }
-            });
+            // Apply translations based on browser language
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('bn')) {
+                state.language = 'bn';
+                applyTranslations('bn');
+            } else {
+                state.language = 'en';
+                applyTranslations('en');
+            }
         });
     </script>
 </body>
